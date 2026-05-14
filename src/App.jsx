@@ -1,7 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+
 import Home from './pages/Home';
 import About from './pages/About';
 import Team from './pages/Team';
@@ -25,6 +26,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/team" element={<Team />} />
             <Route path="/principal-message" element={<PrincipalMessage />} />
+            
             <Route path="/admissions" element={<Admissions />} />
             <Route path="/academics" element={<Academics />} />
             <Route path="/facilities" element={<Facilities />} />
@@ -32,6 +34,8 @@ function App() {
             <Route path="/gallery" element={<Gallery />} />
             
             <Route path="/contact" element={<Contact />} />
+
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
 
