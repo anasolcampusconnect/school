@@ -7,21 +7,25 @@ const PrincipalMessage = () => {
       title: "Excellence",
       des: "At Elite Global Academy, we encourage students to aim high and achieve academic excellence through dedication, smart learning, and continuous improvement in every subject.",
       icon: <BookOpen size={32} className="text-[#B1965A]" />,
+      bg: "bg-yellow-50"
     },
     {
       title: "Discipline",
       des: "We believe discipline builds strong character. Our school promotes punctuality, responsibility, and respect, helping students develop habits that shape their future success.",
       icon: <Target size={32} className="text-[#B1965A]" />,
+      bg: "bg-blue-50"
     },
     {
       title: "Leadership",
       des: "We provide opportunities for students to become confident leaders by participating in clubs, events, and team activities that strengthen decision-making and communication skills.",
       icon: <Globe size={32} className="text-[#B1965A]" />,
+      bg: "bg-green-50"
     },
     {
       title: "Respect",
       des: "Respect is a core value in our school. We teach students to value diversity, treat everyone equally, and build a safe environment based on kindness and empathy.",
       icon: <Handshake size={32} className="text-[#B1965A]" />,
+      bg: "bg-purple-50"
     },
   ];
 
@@ -143,7 +147,7 @@ const PrincipalMessage = () => {
           {values.map((item, index) => (
             <div
               key={index}
-              className="bg-white border border-gray-200 p-8 rounded-sm shadow-sm hover:scale-[1.07] transition duration-300 ease-in-out"
+              className={`${item.bg} border border-gray-200 p-8 rounded-sm shadow-sm hover:shadow-lg hover:scale-[1.07] transition duration-300 ease-in-out`}
             >
               <div className="mb-6 text-[#B1965A]">{item.icon}</div>
               <h3 className="text-lg font-bold text-[#0B1E4A] mb-3 uppercase tracking-wider">
