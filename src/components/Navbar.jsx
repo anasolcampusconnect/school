@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaChevronDown } from 'react-icons/fa';
+import { FaChevronDown, FaGraduationCap } from 'react-icons/fa';
 
 const Navbar = () => {
   const location = useLocation();
@@ -17,13 +17,18 @@ const Navbar = () => {
   const getStyle = (paths) => `${baseLinkClass} ${isActive(paths) ? activeClass : inactiveClass}`;
 
   return (
-    <header className="w-full bg-white font-sans shadow-sm border-b">
+    <header className="w-full bg-white font-sans shadow-[0_8px_30px_rgb(0,0,0,0.04)] sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 xl:px-8 py-4 flex justify-between items-center">
         
         {/* Logo Section */}
-        <Link to="/" className="flex flex-col text-[#0B1E4A]">
-          <span className="text-2xl font-black tracking-wide leading-tight">ELITE GLOBAL</span>
-          <span className="text-sm font-bold tracking-widest">ACADEMY</span>
+        <Link to="/" className="flex items-center gap-3 text-[#0B1E4A] group">
+          <div className="bg-[#0B1E4A] p-2.5 rounded-xl shadow-md group-hover:bg-[#059669] transition-colors duration-300">
+            <FaGraduationCap className="text-white" size={26} />
+          </div>
+          <div className="flex flex-col">
+            <span className="text-2xl font-black tracking-wide leading-tight">ELITE GLOBAL</span>
+            <span className="text-[13px] font-bold tracking-widest text-[#059669]">ACADEMY</span>
+          </div>
         </Link>
 
         {/* Desktop Navigation */}
