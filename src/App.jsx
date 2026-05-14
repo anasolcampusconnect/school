@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
+
 import Home from './pages/Home';
 import About from './pages/About';
 import Team from './pages/Team';
