@@ -226,7 +226,7 @@ const Admissions = () => {
         </button>
       </motion.div>
 
-      {/* --- PAGE CONTENT --- */}
+     
 
       
       <section 
