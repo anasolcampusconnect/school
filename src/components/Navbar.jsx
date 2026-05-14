@@ -1,86 +1,81 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaPhoneAlt, FaEnvelope, FaFacebookF, FaInstagram, FaYoutube, FaLinkedinIn } from 'react-icons/fa';
+import { FaChevronDown } from 'react-icons/fa';
 
 const Navbar = () => {
   const location = useLocation();
+  const currentPath = location.pathname;
 
-  const navLinks = [
-    { name: 'HOME', path: '/' },
-    { name: 'ABOUT', path: '/about' },
-    { name: 'DAY SCHOOL', path: '/day-school' },
-    { name: 'BOARDING SCHOOL', path: '/boarding-school' },
-    { name: 'CONTACT', path: '/contact' },
-    { name: 'MANDATORY DISCLOSURE', path: '/mandatory-disclosure' },
-  ];
+  // Active path check cheyadaniki chinna helper function
+  const isActive = (paths) => paths.includes(currentPath);
+
+  // Common classes and conditional classes
+  const baseLinkClass = "flex items-center gap-1 font-bold text-[15px] px-5 py-2.5 rounded-full transition-all duration-200";
+  const activeClass = "bg-[#E8F5E9] text-[#059669]";
+  const inactiveClass = "text-slate-800 hover:text-[#059669]";
+
+  const getStyle = (paths) => `${baseLinkClass} ${isActive(paths) ? activeClass : inactiveClass}`;
 
   return (
-    <header className="w-full bg-white font-sans border-b shadow-sm">
-      {/* Top Section */}
-      <div className="flex flex-col xl:flex-row justify-between items-center px-4 xl:px-12 py-2 xl:py-0">
+    <header className="w-full bg-white font-sans shadow-sm border-b">
+      <div className="max-w-7xl mx-auto px-4 xl:px-8 py-4 flex justify-between items-center">
         
-        {/* New School Name (Elite Global Academy) */}
-        <div className="bg-[#0B1E4A] text-white px-8 py-5 flex flex-col items-center justify-center min-w-[280px]">
-          <div className="flex items-center gap-3 mb-1">
-            {/* 'E' logo placeholder has been removed from here */}
-            <div className="flex flex-col">
-              <span className="text-xl font-bold tracking-widest leading-tight">ELITE GLOBAL</span>
-              <span className="text-sm tracking-widest text-left">ACADEMY</span>
+        {/* Logo Section */}
+        <Link to="/" className="flex flex-col text-[#0B1E4A]">
+          <span className="text-2xl font-black tracking-wide leading-tight">ELITE GLOBAL</span>
+          <span className="text-sm font-bold tracking-widest">ACADEMY</span>
+        </Link>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex items-center gap-2 xl:gap-4">
+          
+          {/* Home */}
+          <Link to="/" className={getStyle(['/'])}>
+            Home
+          </Link>
+
+          {/* About Us - Dropdown */}
+          <div className="relative group">
+            <button className={getStyle(['/about', '/team', '/principal-message'])}>
+              About Us <FaChevronDown size={11} className={`mt-0.5 transition-transform ${isActive(['/about', '/team', '/principal-message']) ? 'text-[#059669]' : ''}`} />
+            </button>
+            {/* Dropdown Menu */}
+            <div className="absolute top-full left-0 mt-2 w-52 bg-white shadow-xl rounded-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-gray-100 z-50">
+              <Link to="/about" className={`block px-5 py-2.5 text-sm font-bold hover:bg-[#E8F5E9] hover:text-[#059669] ${currentPath === '/about' ? 'text-[#059669] bg-gray-50' : 'text-gray-700'}`}>About Elite Global</Link>
+              <Link to="/team" className={`block px-5 py-2.5 text-sm font-bold hover:bg-[#E8F5E9] hover:text-[#059669] ${currentPath === '/team' ? 'text-[#059669] bg-gray-50' : 'text-gray-700'}`}>Our Team</Link>
+              <Link to="/principal-message" className={`block px-5 py-2.5 text-sm font-bold hover:bg-[#E8F5E9] hover:text-[#059669] ${currentPath === '/principal-message' ? 'text-[#059669] bg-gray-50' : 'text-gray-700'}`}>Principal Message</Link>
             </div>
           </div>
-          <p className="text-[11px] mt-2 font-bold tracking-widest uppercase">CBSE AFFILIATION NO : 3630XXX</p>
-        </div>
 
-        {/* Admissions Banner */}
-        <div className="hidden lg:block bg-[#B1965A] text-white px-8 py-3 font-bold tracking-wider text-sm shadow-sm cursor-pointer hover:bg-[#967d49] transition">
-          ADMISSIONS OPEN 2026 - 27 APPLY NOW!
-        </div>
+          {/* Admissions */}
+          <Link to="/admissions" className={getStyle(['/admissions'])}>
+            Admissions
+          </Link>
 
-        {/* Updated Contact Info */}
-        <div className="hidden lg:flex items-center gap-8 text-[#0B1E4A]">
-          <div className="flex items-center gap-4">
-            <FaPhoneAlt size={22} className="text-[#0B1E4A] opacity-80" />
-            <div>
-              <p className="font-bold text-base">Call Us</p>
-              <p className="text-gray-500 text-sm tracking-wide">+91 99887 76655</p>
+          {/* Academics */}
+          <Link to="/academics" className={getStyle(['/academics'])}>
+            Academics
+          </Link>
+
+          {/* Campus Life - Dropdown */}
+          <div className="relative group">
+            <button className={getStyle(['/facilities', '/activities', '/gallery'])}>
+              Campus Life <FaChevronDown size={11} className={`mt-0.5 transition-transform ${isActive(['/facilities', '/activities', '/gallery']) ? 'text-[#059669]' : ''}`} />
+            </button>
+            {/* Dropdown Menu */}
+            <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-xl rounded-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-gray-100 z-50">
+              <Link to="/facilities" className={`block px-5 py-2.5 text-sm font-bold hover:bg-[#E8F5E9] hover:text-[#059669] ${currentPath === '/facilities' ? 'text-[#059669] bg-gray-50' : 'text-gray-700'}`}>Facilities</Link>
+              <Link to="/activities" className={`block px-5 py-2.5 text-sm font-bold hover:bg-[#E8F5E9] hover:text-[#059669] ${currentPath === '/activities' ? 'text-[#059669] bg-gray-50' : 'text-gray-700'}`}>Activities</Link>
+              <Link to="/gallery" className={`block px-5 py-2.5 text-sm font-bold hover:bg-[#E8F5E9] hover:text-[#059669] ${currentPath === '/gallery' ? 'text-[#059669] bg-gray-50' : 'text-gray-700'}`}>Gallery</Link>
             </div>
           </div>
-          <div className="h-12 w-px bg-gray-300"></div>
-          <div className="flex items-center gap-4">
-            <FaEnvelope size={24} className="text-[#0B1E4A] opacity-80" />
-            <div>
-              <p className="font-bold text-base">Email</p>
-              <p className="text-gray-500 text-sm tracking-wide">contact@eliteglobal.edu.in</p>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      {/* Navigation Section */}
-      <div className="border-t border-gray-100">
-        <div className="flex flex-col lg:flex-row justify-between items-center px-4 xl:px-12 py-4">
-          <nav className="flex flex-wrap justify-center gap-6 lg:gap-10 mb-4 lg:mb-0">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.path}
-                className={`text-[13px] font-bold tracking-widest transition-colors ${
-                  location.pathname === link.path ? 'text-[#B1965A]' : 'text-[#0B1E4A] hover:text-[#B1965A]'
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </nav>
+          {/* Contact */}
+          <Link to="/contact" className={getStyle(['/contact'])}>
+            Contact
+          </Link>
 
-          <div className="flex items-center gap-4">
-            {[FaFacebookF, FaInstagram, FaYoutube, FaLinkedinIn].map((Icon, index) => (
-              <a key={index} href="#" className="p-2.5 border border-[#0B1E4A] rounded-full text-[#0B1E4A] hover:bg-[#0B1E4A] hover:text-white transition">
-                <Icon size={14} />
-              </a>
-            ))}
-          </div>
-        </div>
+        </nav>
       </div>
     </header>
   );
