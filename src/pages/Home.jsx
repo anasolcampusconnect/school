@@ -1513,16 +1513,6 @@ function Branches() {
           ))}
         </div>
 
-        {/* View All Branches CTA */}
-        <div className="text-center mt-12">
-          <a 
-            href="#" 
-            className="inline-flex items-center gap-2 px-8 py-3 bg-[#0B1E4A] text-white rounded-full font-semibold hover:bg-[#B1965A] transition-all duration-300 hover:shadow-lg hover:gap-3 group"
-          >
-            View All Branches
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </a>
-        </div>
       </div>
 
       <style>{`
