@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { FaFacebook, FaTwitter, FaYoutube, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import { path } from "framer-motion/client";
 
 /* ============================================================
    Elite Global Academy — Home Page (Enhanced)
@@ -120,12 +121,9 @@ function Hero() {
                 {s.desc}
               </p>
               <div className="ega-slideUp mt-8 flex flex-wrap gap-4" style={{ animationDelay: ".6s" }}>
-                <a href="#" className="px-7 py-3.5 bg-[#B1965A] text-[#0B1E4A] font-bold rounded-full hover:scale-105 transition-transform shadow-lg shadow-[#B1965A]/40">
-                  {s.cta}
-                </a>
-                <a href="#" className="px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-full hover:bg-white hover:text-[#0B1E4A] transition-colors">
+                <Link to="/admissions" className="px-7 py-3.5 border-2 border-white/40 text-white font-semibold rounded-full hover:bg-white hover:text-[#0B1E4A] transition-colors">
                   Apply Now
-                </a>
+                </Link>
               </div>
             </div>
           )}
@@ -1158,55 +1156,42 @@ const LINKS = [
     icon: GraduationCap, 
     label: "Admissions", 
     desc: "Apply for 2026–27", 
-    color: "from-blue-500 to-cyan-500",
-    bgColor: "bg-blue-50",
-    hoverBg: "hover:bg-blue-500",
-    anim: "ega-slideUp" 
+    anim: "ega-slideUp" ,
+    path: "/admissions",
   },
   { 
     icon: Trophy, 
     label: "Results", 
     desc: "View achievements", 
-    color: "from-amber-500 to-yellow-500",
-    bgColor: "bg-amber-50",
-    hoverBg: "hover:bg-amber-500",
-    anim: "ega-zoom" 
+    anim: "ega-zoom",
+    path: "/academics" 
   },
   { 
     icon: BookOpen, 
     label: "Academics", 
     desc: "Curriculum & programs", 
-    color: "from-emerald-500 to-green-500",
-    bgColor: "bg-emerald-50",
-    hoverBg: "hover:bg-emerald-500",
-    anim: "ega-rotate" 
+    anim: "ega-rotate" ,
+    path: "/academics"
   },
   { 
     icon: Calendar, 
     label: "Events", 
     desc: "Upcoming calendar", 
-    color: "from-purple-500 to-pink-500",
-    bgColor: "bg-purple-50",
-    hoverBg: "hover:bg-purple-500",
-    anim: "ega-slideUp" 
+    anim: "ega-slideUp" ,
   },
   { 
     icon: Users, 
     label: "Campus Life", 
     desc: "Clubs & activities", 
-    color: "from-orange-500 to-red-500",
-    bgColor: "bg-orange-50",
-    hoverBg: "hover:bg-orange-500",
-    anim: "ega-zoom" 
+    anim: "ega-zoom" ,
+    path:"/gallery"
   },
   { 
     icon: Phone, 
     label: "Contact", 
     desc: "Reach our team", 
-    color: "from-indigo-500 to-purple-500",
-    bgColor: "bg-indigo-50",
-    hoverBg: "hover:bg-indigo-500",
-    anim: "ega-rotate" 
+    anim: "ega-rotate" ,
+    path: "/contact"
   },
 ];
 
@@ -1240,23 +1225,23 @@ function QuickLinks() {
             const isHovered = hoveredIndex === i;
             
             return (
-              <a 
+              <Link 
                 key={i} 
-                href="#"
+                to={l.path}
                 className={`group relative overflow-hidden rounded-2xl p-6 transition-all duration-500 
                   ${seen ? l.anim : "opacity-0"}
                   ${isHovered ? 'shadow-2xl -translate-y-3' : 'shadow-lg hover:-translate-y-2'}`}
                 style={{ 
                   animationDelay: `${i * 0.1}s`,
-                  background: `linear-gradient(135deg, white 0%, ${l.bgColor} 100%)`,
+                  background: 'white',
                   border: '1px solid rgba(0,0,0,0.05)'
                 }}
                 onMouseEnter={() => setHoveredIndex(i)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                {/* Animated gradient background on hover */}
+                {/* Navy background on hover - from theme */}
                 <div className={`
-                  absolute inset-0 bg-gradient-to-br ${l.color} opacity-0 transition-opacity duration-500
+                  absolute inset-0 bg-[#0B1E4A] opacity-0 transition-all duration-500
                   ${isHovered ? 'opacity-100' : ''}
                 `} />
                 
@@ -1264,11 +1249,11 @@ function QuickLinks() {
                 <div className={`
                   relative z-10 w-14 h-14 rounded-xl flex items-center justify-center mb-4 
                   transition-all duration-500 transform
-                  ${isHovered ? 'scale-110 rotate-12 bg-white/30' : `bg-white shadow-md ${l.hoverBg}`}
+                  ${isHovered ? 'scale-110 rotate-12 bg-[#B1965A]' : 'bg-[#E6F0E8] group-hover:bg-[#B1965A]/20'}
                 `}>
                   <Icon className={`
                     w-7 h-7 transition-all duration-500
-                    ${isHovered ? 'text-white scale-110' : `text-[#0B1E4A] group-hover:scale-110`}
+                    ${isHovered ? 'text-white scale-110' : 'text-[#0B1E4A] group-hover:text-[#B1965A] group-hover:scale-110'}
                   `} />
                 </div>
 
@@ -1293,30 +1278,30 @@ function QuickLinks() {
                   absolute right-4 top-1/2 -translate-y-1/2 transition-all duration-500
                   ${isHovered ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'}
                 `}>
-                  <ArrowRight className={`w-5 h-5 ${isHovered ? 'text-white' : 'text-[#B1965A]'}`} />
+                  <ArrowRight className={`w-5 h-5 ${isHovered ? 'text-[#B1965A]' : 'text-[#B1965A]'}`} />
                 </div>
 
-                {/* Bottom border animation */}
-                <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#B1965A] to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+                {/* Bottom border animation with gold */}
+                <div className="absolute bottom-0 left-0 w-full h-1 bg-[#B1965A] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
 
                 {/* Shine effect on hover */}
                 {isHovered && (
                   <div className="absolute inset-0 -translate-x-full animate-shine pointer-events-none" />
                 )}
-              </a>
+              </Link>
             );
           })}
         </div>
 
         {/* Call to action button */}
         <div className="text-center mt-12">
-          <a 
-            href="#" 
-            className="inline-flex items-center gap-2 px-8 py-3 bg-[#0B1E4A] text-white rounded-full font-semibold hover:bg-[#B1965A] transition-all duration-300 hover:shadow-lg hover:gap-3"
+          <Link 
+            to ="/facilities" 
+            className="inline-flex items-center gap-2 px-8 py-3 bg-[#0B1E4A] text-white rounded-full font-semibold hover:bg-[#B1965A] transition-all duration-300 hover:shadow-lg hover:gap-3 group"
           >
             Explore All Services 
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -1327,7 +1312,7 @@ function QuickLinks() {
         }
         .animate-shine {
           animation: shine 0.8s ease-in-out;
-          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
         }
       `}</style>
     </section>
