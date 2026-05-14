@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaCircle } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom'; // Added for navigation
+import { useNavigate } from 'react-router-dom';
 
-// Custom component for counting animation on scroll
 const AnimatedNumber = ({ end, suffix = "+" }) => {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
@@ -12,7 +11,7 @@ const AnimatedNumber = ({ end, suffix = "+" }) => {
       ([entry]) => {
         if (entry.isIntersecting) {
           let start = 0;
-          const duration = 2000; // 2 seconds animation
+          const duration = 2000; 
           const increment = end / (duration / 16);
           const timer = setInterval(() => {
             start += increment;
@@ -23,7 +22,7 @@ const AnimatedNumber = ({ end, suffix = "+" }) => {
               setCount(Math.ceil(start));
             }
           }, 16);
-          observer.disconnect(); // Run only once
+          observer.disconnect(); 
         }
       },
       { threshold: 0.5 }
@@ -36,13 +35,12 @@ const AnimatedNumber = ({ end, suffix = "+" }) => {
 };
 
 const Team = () => {
-  const navigate = useNavigate(); // Hook for routing
+  const navigate = useNavigate();
 
-  // Team Data Array 
   const teamMembers = [
     {
       id: 1,
-      name: 'KOMARIAH MALKA',
+      name: 'DR. ARVIND SHARMA',
       role: 'CHAIRMAN',
       title: 'Chairman of Elite Global Group',
       description: 'A visionary education leader with over three decades of service, Shri M. Komariah has played a pivotal role in shaping child-first institutions rooted in values and academic excellence. His leadership philosophy blends discipline, innovation, and care, ensuring every campus delivers a safe and progressive environment for children.',
@@ -54,7 +52,7 @@ const Team = () => {
     },
     {
       id: 2,
-      name: 'YASASVI MALKA',
+      name: 'SIDDHARTH REDDY',
       role: 'CEO & DIRECTOR',
       title: 'CEO & Director of Elite Global',
       description: 'Founder and CEO of Born Bright, Shri Yasasvi Malka is a young entrepreneur committed to nation-building through meaningful education. Trained in civil engineering at BITS Pilani, Dubai Campus, with further study in business psychology and entrepreneurship at University College London, he combines innovation and leadership.',
@@ -66,7 +64,7 @@ const Team = () => {
     },
     {
       id: 3,
-      name: 'PALLAVI MALKA',
+      name: 'DR. ANJALI MENON',
       role: 'DIRECTOR',
       title: 'Director of Elite Global Academy',
       description: 'Mrs. M. Pallavi drives quality-focused school systems with a strong emphasis on holistic child development, teacher empowerment, and parent trust. She champions joyful learning environments where creativity, confidence, and character development go hand in hand.',
@@ -78,7 +76,7 @@ const Team = () => {
     },
     {
       id: 4,
-      name: 'THRIBHUVANA MALKA',
+      name: 'RAJESH VARMA',
       role: 'DIRECTOR',
       title: 'Director of Elite Global Group',
       description: 'Shri Thribhuvana Malka brings a systems-first mindset to educational leadership, focusing on school culture, execution discipline, and long-term institutional consistency across campuses. He works closely with academic and operations teams to convert vision into measurable outcomes.',
@@ -90,7 +88,7 @@ const Team = () => {
     },
     {
       id: 5,
-      name: 'SUSHIL KUMAR',
+      name: 'KIRAN KUMAR',
       role: 'DIRECTOR & GEN SECRETARY',
       title: 'Director of Elite Group of Schools',
       description: 'An Ivy League intern from the University of Pennsylvania and a graduate of the University of the Sciences, Philadelphia, Mr. A. Sushil Kumar brings international exposure and interdisciplinary insight to educational leadership. He drives a learner-centered, research-informed approach.',
@@ -102,7 +100,6 @@ const Team = () => {
     }
   ];
 
-  // Function to smoothly scroll to the last member
   const scrollToLastMember = () => {
     const lastMemberIndex = teamMembers.length - 1;
     const element = document.getElementById(`member-${teamMembers[lastMemberIndex].id}`);
@@ -114,7 +111,7 @@ const Team = () => {
   return (
     <div className="bg-gray-50 font-sans">
       
-      {/* 1. Hero Section */}
+      {/* Hero Section */}
       <section className="w-full flex flex-col lg:flex-row bg-[#2C3E50] min-h-[85vh] lg:min-h-[calc(100vh-80px)]">
         <div className="w-full lg:w-1/2 flex flex-col justify-center p-10 lg:p-20 text-white z-10">
           <div className="inline-block border border-white/40 rounded-full px-4 py-1.5 text-xs font-bold w-max mb-5 tracking-wider">
@@ -135,13 +132,13 @@ const Team = () => {
 
           <div className="flex flex-wrap gap-4">
             <button 
-              onClick={scrollToLastMember} // Added onClick event for smooth scroll
+              onClick={scrollToLastMember} 
               className="bg-[#059669] hover:bg-[#047855] transition text-white px-6 py-3 rounded-xl font-bold text-base shadow-lg"
             >
               Meet the Leadership
             </button>
             <button 
-              onClick={() => navigate('/about')} // Added routing to /about page
+              onClick={() => navigate('/about')} 
               className="border border-white/30 hover:border-white transition text-white px-6 py-3 rounded-xl font-bold text-base"
             >
               About Elite Global
@@ -149,7 +146,6 @@ const Team = () => {
           </div>
         </div>
         
-        {/* Fixed image container */}
         <div className="w-full lg:w-1/2 h-[40vh] lg:h-auto relative">
           <img 
             src="https://images.pexels.com/photos/256455/pexels-photo-256455.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
@@ -159,13 +155,13 @@ const Team = () => {
         </div>
       </section>
 
-      {/* 2. Sticky Stacking Cards Section - Increased Width to max-w-7xl */}
+      {/* Sticky Stacking Cards Section  */}
       <section className="max-w-7xl mx-auto px-4 py-16">
         <div className="space-y-0 pb-10">
           {teamMembers.map((member, index) => (
             <div 
               key={member.id} 
-              id={`member-${member.id}`} // Added ID for the scrolling logic to find the card
+              id={`member-${member.id}`}
               className="sticky top-28 min-h-[45vh] w-full shadow-[0_-5px_30px_rgb(0,0,0,0.08)] rounded-[2rem] overflow-hidden flex flex-col md:flex-row mb-12 border border-black/5"
               style={{ backgroundColor: member.bgColor, zIndex: index + 10 }}
             >
@@ -213,7 +209,7 @@ const Team = () => {
         </div>
       </section>
 
-      {/* 3. Stats Row with Counting Animation */}
+      {/* Stats Row with Counting Animation */}
       <section className="max-w-6xl mx-auto px-6 py-12 border-t border-gray-200">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
           <div>
@@ -243,7 +239,7 @@ const Team = () => {
         </div>
       </section>
 
-      {/* 4. Bottom CTA Section */}
+      {/* Bottom CTA Section */}
       <section className="max-w-5xl mx-auto px-4 pb-16">
         <div className="bg-[#0B1E4A] rounded-[2rem] p-10 lg:p-14 flex flex-col md:flex-row justify-between items-center shadow-2xl relative overflow-hidden">
           
@@ -264,7 +260,7 @@ const Team = () => {
               About Elite Global
             </button>
             <button 
-              onClick={() => navigate('/gallary')}
+              onClick={() => navigate('/gallery')}
               className="border-2 border-white/50 text-white font-bold text-base px-6 py-3 rounded-full hover:bg-white/10 transition"
             >
               View Gallery
