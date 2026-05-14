@@ -14,7 +14,6 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Frontend UI only
     setShowMessage(true);
 
     setTimeout(() => {
