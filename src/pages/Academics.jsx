@@ -58,14 +58,38 @@ const useReveal = () => {
 const AcademicsPage = () => {
   useReveal();
 
-  const SubjectCard = ({ icon: Icon, title, delay = "" }) => (
-    <div className={`reveal ${delay} flex items-center gap-3 bg-white border border-gray-100 p-3 rounded-xl shadow-sm hover:shadow-md hover:scale-105 transition-all duration-300`}>
-      <div className="p-2 bg-[#B1965A]/10 rounded-lg">
-        <Icon size={18} className="text-[#B1965A]" />
+  const SubjectCard = ({ icon: Icon, title, delay = "", variant = "default" }) => {
+
+    const bgColors = {
+      default: "bg-white border-gray-100",
+      gold: "bg-[#B1965A]/10 border-[#B1965A]/20",
+      blue: "bg-blue-50 border-blue-100",
+      green: "bg-green-50 border-green-100",
+      purple: "bg-purple-50 border-purple-100",
+    };
+
+    const iconColors = {
+      default: "bg-[#B1965A]/10 text-[#B1965A]",
+      gold: "bg-[#B1965A]/20 text-[#B1965A]",
+      blue: "bg-blue-100 text-blue-600",
+      green: "bg-green-100 text-green-600",
+      purple: "bg-purple-100 text-purple-600",
+    };
+
+    return (
+      <div
+        className={`reveal ${delay} flex items-center gap-3 p-3 rounded-xl shadow-sm hover:shadow-md hover:scale-105 transition-all duration-300 border ${bgColors[variant]}`}
+      >
+        <div className={`p-2 rounded-lg ${iconColors[variant]}`}>
+          <Icon size={18} />
+        </div>
+
+        <span className="text-[#0B1E4A] font-semibold text-sm">
+          {title}
+        </span>
       </div>
-      <span className="text-[#0B1E4A] font-semibold text-sm">{title}</span>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="bg-white font-sans overflow-x-hidden">
@@ -178,10 +202,10 @@ const AcademicsPage = () => {
               motor skills, and social interaction, ensuring first steps are filled with wonder.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <SubjectCard icon={Music} title="Phonics & Rhymes" delay="reveal-delay-1" />
-              <SubjectCard icon={Palette} title="Art & Craft" delay="reveal-delay-2" />
-              <SubjectCard icon={Book} title="Storytelling" delay="reveal-delay-3" />
-              <SubjectCard icon={Lightbulb} title="Sensory Play" delay="reveal-delay-4" />
+              <SubjectCard icon={Music} title="Phonics & Rhymes" delay="reveal-delay-1" variant="gold" />
+              <SubjectCard icon={Palette} title="Art & Craft" delay="reveal-delay-2" variant="blue" />
+              <SubjectCard icon={Book} title="Storytelling" delay="reveal-delay-3" variant="default" />
+              <SubjectCard icon={Lightbulb} title="Sensory Play" delay="reveal-delay-4" variant="green" />
             </div>
           </div>
         </div>
@@ -198,10 +222,10 @@ const AcademicsPage = () => {
               encouraging students to connect classroom lessons with the real world.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <SubjectCard icon={Languages} title="English" delay="reveal-delay-1" />
-              <SubjectCard icon={Calculator} title="Mathematics" delay="reveal-delay-2" />
-              <SubjectCard icon={Microscope} title="EVS" delay="reveal-delay-3" />
-              <SubjectCard icon={Brain} title="Life Skills" delay="reveal-delay-4" />
+              <SubjectCard icon={Languages} title="English" delay="reveal-delay-1" variant="green" />
+              <SubjectCard icon={Calculator} title="Mathematics" delay="reveal-delay-2" variant="blue" />
+              <SubjectCard icon={Microscope} title="EVS" delay="reveal-delay-3" variant="default" />
+              <SubjectCard icon={Brain} title="Life Skills" delay="reveal-delay-4" variant="gold" />
             </div>
           </div>
           <div className="reveal from-right w-full md:w-1/2 hover:scale-[1.02] transition-transform duration-500">
@@ -244,10 +268,10 @@ const AcademicsPage = () => {
               conceptual, integrating technology and advanced problem-solving techniques.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <SubjectCard icon={Microscope} title="Science" delay="reveal-delay-1" />
-              <SubjectCard icon={Calculator} title="Advanced Math" delay="reveal-delay-2" />
-              <SubjectCard icon={Languages} title="Social Studies" delay="reveal-delay-3" />
-              <SubjectCard icon={Brain} title="Coding / ICT" delay="reveal-delay-4" />
+              <SubjectCard icon={Microscope} title="Science" delay="reveal-delay-1" variant="blue" />
+              <SubjectCard icon={Calculator} title="Advanced Math" delay="reveal-delay-2" variant="green" />
+              <SubjectCard icon={Languages} title="Social Studies" delay="reveal-delay-3" variant="gold" />
+              <SubjectCard icon={Brain} title="Coding / ICT" delay="reveal-delay-4" variant="purple" />
             </div>
           </div>
         </div>
