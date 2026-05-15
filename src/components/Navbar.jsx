@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaChevronDown } from 'react-icons/fa';
+import { FaChevronDown, FaGraduationCap, FaBars, FaTimes } from 'react-icons/fa';
 
 const Navbar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileAboutOpen, setIsMobileAboutOpen] = useState(false);
+  const [isMobileCampusOpen, setIsMobileCampusOpen] = useState(false);
+  
   const location = useLocation();
   const currentPath = location.pathname;
 
@@ -16,14 +20,26 @@ const Navbar = () => {
 
   const getStyle = (paths) => `${baseLinkClass} ${isActive(paths) ? activeClass : inactiveClass}`;
 
+  // Helper function to close mobile menu on link click
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+    setIsMobileAboutOpen(false);
+    setIsMobileCampusOpen(false);
+  };
+
   return (
-    <header className="w-full bg-white font-sans shadow-sm border-b">
+    <header className="w-full bg-white font-sans shadow-[0_8px_30px_rgb(0,0,0,0.04)] sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 xl:px-8 py-4 flex justify-between items-center">
         
         {/* Logo Section */}
-        <Link to="/" className="flex flex-col text-[#0B1E4A]">
-          <span className="text-2xl font-black tracking-wide leading-tight">ELITE GLOBAL</span>
-          <span className="text-sm font-bold tracking-widest">ACADEMY</span>
+        <Link to="/" className="flex items-center gap-3 text-[#0B1E4A] group" onClick={closeMobileMenu}>
+          <div className="bg-[#0B1E4A] p-2.5 rounded-xl shadow-md group-hover:bg-[#059669] transition-colors duration-300">
+            <FaGraduationCap className="text-white" size={26} />
+          </div>
+          <div className="flex flex-col">
+            <span className="text-2xl font-black tracking-wide leading-tight">ELITE GLOBAL</span>
+            <span className="text-[13px] font-bold tracking-widest text-[#059669]">ACADEMY</span>
+          </div>
         </Link>
 
         {/* Desktop Navigation */}
@@ -76,7 +92,69 @@ const Navbar = () => {
           </Link>
 
         </nav>
+
+        {/* Mobile Menu Toggle Button */}
+        <div className="flex lg:hidden items-center">
+          <button 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="text-[#0B1E4A] hover:text-[#059669] focus:outline-none p-2 transition-colors duration-200"
+          >
+            {isMobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+          </button>
+        </div>
+
       </div>
+
+      {/* Mobile Navigation Dropdown */}
+      {isMobileMenuOpen && (
+        <nav className="lg:hidden bg-white border-t border-gray-100 px-4 py-4 flex flex-col gap-2 shadow-lg max-h-[80vh] overflow-y-auto w-full absolute left-0 top-full">
+          
+          <Link to="/" className={getStyle(['/'])} onClick={closeMobileMenu}>Home</Link>
+
+          {/* About Us Mobile Dropdown */}
+          <div className="flex flex-col">
+            <button 
+              onClick={() => setIsMobileAboutOpen(!isMobileAboutOpen)}
+              className={`${baseLinkClass} w-full justify-between ${isActive(['/about', '/team', '/principal-message']) ? activeClass : inactiveClass}`}
+            >
+              <span>About Us</span>
+              <FaChevronDown size={11} className={`transition-transform duration-200 ${isMobileAboutOpen ? 'rotate-180 text-[#059669]' : ''}`} />
+            </button>
+            {isMobileAboutOpen && (
+              <div className="flex flex-col pl-6 mt-1 border-l-2 border-gray-100 ml-5 gap-1">
+                <Link to="/about" className={`py-2 text-[14px] font-bold ${currentPath === '/about' ? 'text-[#059669]' : 'text-gray-600 hover:text-[#059669]'}`} onClick={closeMobileMenu}>About Elite Global</Link>
+                <Link to="/team" className={`py-2 text-[14px] font-bold ${currentPath === '/team' ? 'text-[#059669]' : 'text-gray-600 hover:text-[#059669]'}`} onClick={closeMobileMenu}>Our Team</Link>
+                <Link to="/principal-message" className={`py-2 text-[14px] font-bold ${currentPath === '/principal-message' ? 'text-[#059669]' : 'text-gray-600 hover:text-[#059669]'}`} onClick={closeMobileMenu}>Principal Message</Link>
+              </div>
+            )}
+          </div>
+
+          <Link to="/admissions" className={getStyle(['/admissions'])} onClick={closeMobileMenu}>Admissions</Link>
+          <Link to="/academics" className={getStyle(['/academics'])} onClick={closeMobileMenu}>Academics</Link>
+
+          {/* Campus Life Mobile Dropdown */}
+          <div className="flex flex-col">
+            <button 
+              onClick={() => setIsMobileCampusOpen(!isMobileCampusOpen)}
+              className={`${baseLinkClass} w-full justify-between ${isActive(['/facilities', '/activities', '/gallery']) ? activeClass : inactiveClass}`}
+            >
+              <span>Campus Life</span>
+              <FaChevronDown size={11} className={`transition-transform duration-200 ${isMobileCampusOpen ? 'rotate-180 text-[#059669]' : ''}`} />
+            </button>
+            {isMobileCampusOpen && (
+              <div className="flex flex-col pl-6 mt-1 border-l-2 border-gray-100 ml-5 gap-1">
+                <Link to="/facilities" className={`py-2 text-[14px] font-bold ${currentPath === '/facilities' ? 'text-[#059669]' : 'text-gray-600 hover:text-[#059669]'}`} onClick={closeMobileMenu}>Facilities</Link>
+                <Link to="/activities" className={`py-2 text-[14px] font-bold ${currentPath === '/activities' ? 'text-[#059669]' : 'text-gray-600 hover:text-[#059669]'}`} onClick={closeMobileMenu}>Activities</Link>
+                <Link to="/gallery" className={`py-2 text-[14px] font-bold ${currentPath === '/gallery' ? 'text-[#059669]' : 'text-gray-600 hover:text-[#059669]'}`} onClick={closeMobileMenu}>Gallery</Link>
+              </div>
+            )}
+          </div>
+
+          <Link to="/contact" className={getStyle(['/contact'])} onClick={closeMobileMenu}>Contact</Link>
+
+        </nav>
+      )}
+
     </header>
   );
 };
