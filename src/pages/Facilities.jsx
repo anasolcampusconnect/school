@@ -16,7 +16,7 @@ import {
   BookOpen,
   Paintbrush,
   CloudSun,
-  School,
+  School, 
   Users,
   Trophy,
   MapPin,
