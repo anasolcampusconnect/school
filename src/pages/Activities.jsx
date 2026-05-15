@@ -216,7 +216,9 @@ const SectionCard = ({ section }) => {
 
   return (
     <div
-      className={`rounded-3xl border ${section.border} overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group`}
+      className={`rounded-3xl bg-white/90 backdrop-blur border ${section.border}
+overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2
+transition-all duration-500 group relative`}
     >
       {/* Top image gallery */}
       <div className="relative h-56 overflow-hidden">
@@ -226,7 +228,9 @@ const SectionCard = ({ section }) => {
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
 
-        <div className={`absolute inset-0 bg-gradient-to-br  opacity-30`} />
+        <div
+          className={`absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-70`}
+        />
 
         <div className="absolute bottom-3 right-3 flex gap-1.5">
           {section.images.map((img, i) => (
@@ -262,11 +266,12 @@ const SectionCard = ({ section }) => {
           ))}
         </div>
 
-        <button
-          className={`w-full py-2.5 rounded-xl text-sm font-bold bg-gradient-to-r ${section.color} text-white hover:opacity-90 transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5`}
+        <Link
+          to="/gallery"
+          className={`w-full flex items-center justify-center py-2.5 rounded-xl text-sm font-bold bg-gradient-to-r ${section.color} text-white hover:opacity-90 transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5`}
         >
           View More →
-        </button>
+        </Link>
       </div>
     </div>
   );
@@ -281,282 +286,301 @@ const ActivitiesPage = () => {
       : sections.filter((s) => s.id === activeSection);
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans">
-      {/* ── HERO ── */}
-      <section className="relative h-screen md:h-screen w-full bg-[#0B1E4A] overflow-hidden">
-        {/* decorative circles */}
-        {/* <div className="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-[#059669]/20 blur-3xl" />
-        <div className="absolute -bottom-10 -left-10 w-64 h-64 rounded-full bg-purple-500/20 blur-3xl" /> */}
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${bgimage})` }}
-        />
-        <div className="absolute inset-0 bg-black/60" />
-        <div className="max-w-7xl mx-auto px-4 xl:px-8 py-20 relative z-10 text-center">
-          <div className="inline-flex items-center gap-2 bg-[#059669]/20 text-[#34d399] text-sm font-bold px-5 py-2 rounded-full mb-6 border border-[#059669]/30">
-            🌟 Campus Life at Elite Global
-          </div>
-          <h1 className="text-4xl md:text-6xl font-black text-white mb-5 leading-tight">
-            Where Every Student <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#34d399] to-[#059669]">
-              Discovers Their Spark
-            </span>
-          </h1>
-          <p className="text-slate-300 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-            From arts to athletics, dance to debate — our rich extracurricular
-            life shapes well-rounded individuals ready to lead tomorrow.
-          </p>
+    <div className="relative min-h-screen overflow-hidden font-sans ">
+      <div className="relative z-10">
+        <section className="relative h-screen md:h-screen w-full overflow-hidden ">
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${bgimage})` }}
+          />
 
-          {/* Stats row */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
-            {[
-              ["15+", "Activities"],
-              ["500+", "Students"],
-              ["30+", "Awards"],
-              ["12", "Annual Events"],
-            ].map(([num, label]) => (
-              <div
-                key={label}
-                className="bg-white/10 backdrop-blur rounded-2xl py-4 px-2 border border-white/10"
-              >
-                <div className="text-2xl font-black text-[#34d399]">{num}</div>
-                <div className="text-slate-300 text-xs font-semibold mt-1">
-                  {label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+          {/* Colored Overlay */}
+          <div className="absolute inset-0 bg-black/60 " />
 
-      {/* ── SECTION CARDS ── */}
-      <section className="max-w-7xl mx-auto px-4 xl:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-          {filtered.map((section) => (
-            <SectionCard key={section.id} section={section} />
-          ))}
-        </div>
-      </section>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,0.25),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(6,182,212,0.20),transparent_35%)]" />
 
-      {/* ── EVENT TIMELINE ── */}
-      {/* ── EVENT TIMELINE ── */}
-      <section className="relative py-20 overflow-hidden bg-gradient-to-b from-slate-50 via-white to-emerald-50/40">
-        {/* Background Glow */}
-        <div className="absolute top-0 left-0 w-72 h-72 bg-emerald-200/30 blur-3xl rounded-full" />
-        <div className="absolute bottom-0 right-0 w-72 h-72 bg-blue-200/30 blur-3xl rounded-full" />
-
-        <div className="relative max-w-6xl mx-auto px-4 xl:px-8">
-          {/* Heading */}
-          <div className="text-center mb-16">
-            <span className="inline-flex items-center gap-2 bg-emerald-100 text-[#059669] px-4 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-[0.2em] shadow-sm">
-              📅 Academic Year
-            </span>
-
-            <h2 className="mt-5 text-4xl md:text-5xl font-black text-[#0B1E4A] leading-tight">
-              Events Calendar
-            </h2>
-
-            <p className="text-slate-500 mt-4 max-w-2xl mx-auto text-lg">
-              A journey filled with celebrations, competitions, achievements,
-              and unforgettable school memories.
-            </p>
-          </div>
-
-          {/* Timeline */}
-          <div className="relative">
-            {/* Animated Center Line */}
-            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 -translate-x-1/2">
-              <div className="w-1 h-full bg-gradient-to-b from-emerald-400 via-emerald-500 to-[#0B1E4A] rounded-full relative overflow-hidden">
-                <div className="absolute inset-0 bg-white/30 animate-pulse" />
-              </div>
+          {/* Content */}
+          <div className="relative z-10 max-w-7xl mx-auto px-4 xl:px-8 py-24 text-center">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-xl text-emerald-200 text-sm font-bold px-5 py-2 rounded-full mb-6 border border-white/10 shadow-lg">
+              🌟 Campus Life at Elite Global
             </div>
 
-            <div className="space-y-12">
-              {timeline.map((item, i) => (
-                <div
-                  key={item.month}
-                  className={`relative flex flex-col md:flex-row items-center gap-6 ${
-                    i % 2 !== 0 ? "md:flex-row-reverse" : ""
-                  }`}
-                >
-                  {/* Content */}
+            {/* Heading */}
+            <h1 className="text-3xl md:text-6xl font-black text-white leading-tight tracking-tight">
+              Where Every Student <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-cyan-300 to-pink-300">
+                Discovers Their Spark
+              </span>
+            </h1>
+
+            {/* Description */}
+            <p className="text-emerald-50/90 text-lg md:text-lg max-w-3xl mx-auto mt-6 leading-relaxed">
+              From arts to athletics, dance to debate — our vibrant
+              extracurricular ecosystem helps students grow into confident,
+              creative, and future-ready leaders.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                to="/facilities"
+                className="px-8 py-4 rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-bold shadow-xl hover:scale-105 transition duration-300"
+              >
+                Explore Facilities
+              </Link>
+
+              <Link
+                to="/contact"
+                className="px-8 py-4 rounded-full border border-white/20 bg-white/10 backdrop-blur-xl text-white font-bold hover:bg-white/20 transition duration-300"
+              >
+                Contact Us
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ── SECTION CARDS ── */}
+        <section className="relative px-4 xl:px-8 py-16 bg-gradient-to-b from-emerald-100/50 via-emarald-100/50 to-red-100/50 ">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
+            {filtered.map((section) => (
+              <SectionCard key={section.id} section={section} />
+            ))}
+          </div>
+        </section>
+
+        <section className="relative py-20 overflow-hidden bg-gradient-to-b from-red-100/50 via-sky-50/40 to-sky-200/50">
+          {/* Background Glow */}
+
+          <div className="relative max-w-6xl mx-auto px-4 xl:px-8">
+            {/* Heading */}
+            <div className="text-center mb-16">
+              <span className="inline-flex items-center gap-2 bg-emerald-100 text-[#059669] px-4 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-[0.2em] shadow-sm">
+                📅 Academic Year
+              </span>
+
+              <h2 className="mt-5 text-4xl md:text-5xl font-black text-[#0B1E4A] leading-tight">
+                Events Calendar
+              </h2>
+
+              <p className="text-slate-500 mt-4 max-w-2xl mx-auto text-lg">
+                A journey filled with celebrations, competitions, achievements,
+                and unforgettable school memories.
+              </p>
+            </div>
+
+            {/* Timeline */}
+            <div className="relative">
+              <div className="hidden md:block absolute left-1/2 top-0 bottom-0 -translate-x-1/2">
+                <div className="w-1 h-full bg-gradient-to-b from-emerald-400 via-emerald-500 to-[#0B1E4A] rounded-full relative overflow-hidden">
+                  <div className="absolute inset-0 bg-white/30 animate-pulse" />
+                </div>
+              </div>
+
+              <div className="space-y-12">
+                {timeline.map((item, i) => (
                   <div
-                    className={`flex-1 ${
-                      i % 2 === 0 ? "md:text-right" : "md:text-left"
+                    key={item.month}
+                    className={`relative flex flex-col md:flex-row items-center gap-6 ${
+                      i % 2 !== 0 ? "md:flex-row-reverse" : ""
                     }`}
                   >
+                    {/* Content */}
                     <div
-                      className={`inline-flex items-center gap-2 bg-emerald-100 text-[#059669] text-xs font-black px-4 py-1.5 rounded-full shadow-sm mb-3`}
+                      className={`flex-1 ${
+                        i % 2 === 0 ? "md:text-right" : "md:text-left"
+                      }`}
                     >
-                      ✨ {item.month} 2024
-                    </div>
+                      <div
+                        className={`inline-flex items-center gap-2 bg-emerald-100 text-[#059669] text-xs font-black px-4 py-1.5 rounded-full shadow-sm mb-3`}
+                      >
+                        ✨ {item.month} 2024
+                      </div>
 
-                    <div className="group relative bg-white/80 backdrop-blur-xl border border-white/60 rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 overflow-hidden">
-                      {/* Hover Gradient */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/5 to-blue-500/10 opacity-0 group-hover:opacity-100 transition duration-500" />
+                      <div className="group relative bg-white/60 backdrop-blur-xl border border-white/60 rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all duration-1000 hover:-translate-y-1 overflow-hidden">
+                        {/* Hover Gradient */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/5 to-blue-500/10 opacity-0 group-hover:opacity-100 transition duration-500" />
 
-                      <div className="relative flex items-start gap-4">
-                        {/* Event Icon */}
-                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#059669] to-[#0B1E4A] text-white flex items-center justify-center shadow-md shrink-0 text-xl">
-                          🎉
-                        </div>
+                        <div className="relative flex items-start gap-4">
+                          {/* Event Icon */}
+                          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#059669] to-[#0B1E4A] text-white flex items-center justify-center shadow-md shrink-0 text-xl">
+                            🎉
+                          </div>
 
-                        {/* Text */}
-                        <div>
-                          <h3 className="font-black text-lg text-[#0B1E4A]">
-                            {item.event}
-                          </h3>
+                          {/* Text */}
+                          <div>
+                            <h3 className="font-black text-lg text-[#0B1E4A]">
+                              {item.event}
+                            </h3>
 
-                          <p className="text-slate-500 text-sm mt-1 leading-relaxed">
-                            Join us for exciting activities, student
-                            participation, and memorable moments throughout the
-                            academic year.
-                          </p>
+                            <p className="text-slate-500 text-sm mt-1 leading-relaxed">
+                              Join us for exciting activities, student
+                              participation, and memorable moments throughout
+                              the academic year.
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Timeline Image */}
-                  <div className="relative hidden md:flex items-center justify-center">
-                    {/* Pulse Ring */}
-                    <div className="absolute w-24 h-24 rounded-full bg-emerald-400/20 animate-ping" />
+                    {/* Timeline Image */}
+                    <div className="relative hidden md:flex items-center justify-center">
+                      {/* Pulse Ring */}
+                      <div className="absolute w-24 h-24 rounded-full bg-emerald-400/20 animate-ping" />
 
-                    <div className="relative z-10 w-24 h-24 rounded-full overflow-hidden border-[5px] border-white shadow-2xl ring-4 ring-emerald-100">
-                      <img
-                        src={item.icon}
-                        alt={item.event}
-                        className="w-full h-full object-cover hover:scale-110 transition duration-500"
-                      />
+                      <div className="relative z-10 w-24 h-24 rounded-full overflow-hidden border-[5px] border-white shadow-2xl ring-4 ring-emerald-100">
+                        <img
+                          src={item.icon}
+                          alt={item.event}
+                          className="w-full h-full object-cover hover:scale-110 transition duration-500"
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Spacer */}
-                  <div className="flex-1 hidden md:block" />
+                    {/* Spacer */}
+                    <div className="flex-1 hidden md:block" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* ── CTA ── */}
+        <section className="relative overflow-hidden bg-slate-50 py-20 overflow-hidden bg-gradient-to-b from-sky-200/50 via-emarald-50/50 to-emerald-100/50">
+          {/* Background Blur Circles */}
+
+          <div className="relative max-w-4xl mx-auto px-4">
+            <div className="bg-white/80 backdrop-blur-xl border border-white/60 rounded-[2rem] p-10 md:p-14 text-center shadow-xl relative overflow-hidden">
+              {/* subtle inner glow */}
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/40 via-transparent to-cyan-50/30 pointer-events-none" />
+
+              {/* Icon */}
+              <div className="relative w-20 h-20 mx-auto rounded-full bg-emerald-100 flex items-center justify-center text-4xl mb-6 shadow-md">
+                🌟
+              </div>
+
+              {/* Heading */}
+              <h2 className="relative text-3xl md:text-4xl font-black text-slate-900 leading-tight">
+                Ready to Join the Journey?
+              </h2>
+
+              {/* Description */}
+              <p className="relative text-slate-600 text-lg mt-4 max-w-2xl mx-auto leading-relaxed">
+                Give your child a vibrant learning environment filled with
+                creativity, confidence, friendships, and memorable experiences.
+              </p>
+
+              {/* Buttons */}
+              <div className="relative mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+                {/* Primary Button */}
+                <Link
+                  to="/admissions"
+                  className="inline-flex items-center justify-center bg-emerald-600 text-white font-bold px-8 py-4 rounded-full hover:bg-emerald-700 transition-all duration-300 shadow-lg hover:shadow-emerald-300/40 hover:-translate-y-1"
+                >
+                  Apply for Admission
+                </Link>
+
+                {/* Secondary Button */}
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center justify-center border border-slate-300 bg-white/70 backdrop-blur text-slate-700 font-bold px-8 py-4 rounded-full hover:bg-slate-100 transition-all duration-300"
+                >
+                  Contact Us
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* ── PHOTO SHOWCASE ── */}
+        <section className="py-16 bg-slate-50 bg-gradient-to-b from-emerald-100/50 via-red-200/50 to-slate-100/50 ">
+          <div className="max-w-7xl mx-auto px-4 xl:px-8">
+            <div className="text-center mb-10">
+              <span className="text-[#059669] font-bold text-sm uppercase tracking-widest">
+                Memories
+              </span>
+              <h2 className="text-3xl md:text-4xl font-black text-[#0B1E4A] mt-2">
+                Activity Showcase
+              </h2>
+              <p className="text-slate-500 mt-3">
+                A glimpse into the vibrant life at Elite Global Academy.
+              </p>
+            </div>
+
+            {/* Masonry-style grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {[
+                {
+                  src: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=800&q=80",
+                  tall: true,
+                  label: "Art Session",
+                },
+                {
+                  src: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80",
+                  tall: false,
+                  label: "Dance Practice",
+                },
+                {
+                  src: "https://images.unsplash.com/photo-1517649763962-0c623066013b?w=800&q=80",
+                  tall: false,
+                  label: "Basketball",
+                },
+                {
+                  src: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80",
+                  tall: true,
+                  label: "Annual Day",
+                },
+                {
+                  src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&q=80",
+                  tall: false,
+                  label: "Painting",
+                },
+                {
+                  src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80",
+                  tall: true,
+                  label: "Reading Club",
+                },
+                {
+                  src: "https://images.unsplash.com/photo-1513258496099-48168024aec0?w=800&q=80",
+                  tall: false,
+                  label: "Festival",
+                },
+                {
+                  src: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&q=80",
+                  tall: false,
+                  label: "Music",
+                },
+                {
+                  src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&q=80",
+                  tall: false,
+                  label: "Creative Learning",
+                },
+              ].map((photo, i) => (
+                <div
+                  key={i}
+                  className={`relative overflow-hidden rounded-2xl group cursor-pointer ${photo.tall ? "row-span-2" : ""}`}
+                  style={{ minHeight: photo.tall ? "320px" : "150px" }}
+                >
+                  <img
+                    src={photo.src}
+                    alt={photo.label}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    style={{
+                      height: "100%",
+                      minHeight: photo.tall ? "320px" : "150px",
+                    }}
+                  />
+                  {/* overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <span className="text-white font-bold text-sm">
+                      {photo.label}
+                    </span>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
-        </div>
-      </section>
-      {/* ── CTA ── */}
-      <section className="bg-gradient-to-br from-[#059669] to-[#0B1E4A] py-16 text-center">
-        <div className="max-w-2xl mx-auto px-4">
-          <div className="text-5xl mb-4">🌟</div>
-          <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
-            Ready to Join the Journey?
-          </h2>
-          <p className="text-green-100 mb-8 text-lg">
-            Give your child the gift of a vibrant school life filled with
-            learning, laughter, and lasting memories.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              to="/admissions"
-              className="inline-block bg-white text-[#059669] font-black px-8 py-3.5 rounded-full hover:bg-green-50 transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-            >
-              Apply for Admission
-            </Link>
-            <Link
-              to="/contact"
-              className="inline-block border-2 border-white text-white font-bold px-8 py-3.5 rounded-full hover:bg-white/10 transition-all duration-200"
-            >
-              Contact Us
-            </Link>
-          </div>
-        </div>
-      </section>
-      {/* ── PHOTO SHOWCASE ── */}
-      <section className="py-16 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 xl:px-8">
-          <div className="text-center mb-10">
-            <span className="text-[#059669] font-bold text-sm uppercase tracking-widest">
-              Memories
-            </span>
-            <h2 className="text-3xl md:text-4xl font-black text-[#0B1E4A] mt-2">
-              Activity Showcase
-            </h2>
-            <p className="text-slate-500 mt-3">
-              A glimpse into the vibrant life at Elite Global Academy.
-            </p>
-          </div>
-
-          {/* Masonry-style grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {[
-              {
-                src: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=500&q=80",
-                tall: true,
-                label: "Art Session",
-              },
-              {
-                src: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=500&q=80",
-                tall: false,
-                label: "Dance Practice",
-              },
-              {
-                src: "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=500&q=80",
-                tall: false,
-                label: "Basketball",
-              },
-              {
-                src: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=500&q=80",
-                tall: true,
-                label: "Annual Day",
-              },
-              {
-                src: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=500&q=80",
-                tall: false,
-                label: "Painting",
-              },
-              {
-                src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=500&q=80",
-                tall: true,
-                label: "Reading Club",
-              },
-              {
-                src: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=500&q=80",
-                tall: false,
-                label: "Festival",
-              },
-              {
-                src: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=500&q=80",
-                tall: false,
-                label: "Music",
-              },
-              {
-                src: "https://images.openai.com/static-rsc-4/siiiyQcXuQHey3JVDzwfDh-AQR2odg1paWl8V1WBiISkoLwpK3o4fkMoMLjlMrKVipvR4w1XLhXdTFpNnHbbrCfoQfLfE_5iOaqtkA72N84NBE4Ch67izAAxAYJINuUspgUHRUT33EWeFsFAYTfrPn2Wq1gldrvh3Q6Pe78EJVA?purpose=inline",
-                tall: false,
-                label: "Music",
-              },
-            ].map((photo, i) => (
-              <div
-                key={i}
-                className={`relative overflow-hidden rounded-2xl group cursor-pointer ${photo.tall ? "row-span-2" : ""}`}
-                style={{ minHeight: photo.tall ? "320px" : "150px" }}
-              >
-                <img
-                  src={photo.src}
-                  alt={photo.label}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  style={{
-                    height: "100%",
-                    minHeight: photo.tall ? "320px" : "150px",
-                  }}
-                />
-                {/* overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                  <span className="text-white font-bold text-sm">
-                    {photo.label}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── FOOTER ── */}
+        </section>
+      </div>
     </div>
   );
 };
