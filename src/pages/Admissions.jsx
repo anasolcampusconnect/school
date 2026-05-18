@@ -194,7 +194,7 @@ const Admissions = () => {
 
               <button 
                 onClick={() => setShowPromoPopup(false)}
-                className="absolute bottom-4 right-4 bg-white text-gray-500 hover:text-red-500 rounded-full p-2.5 shadow-[0_4px_15px_rgba(0,0,0,0.15)] z-30 transition-transform hover:scale-110 border border-gray-100"
+                className="absolute top-4 right-4 bg-white text-gray-500 hover:text-red-500 rounded-full p-2.5 shadow-[0_4px_15px_rgba(0,0,0,0.15)] z-30 transition-transform hover:scale-110 border border-gray-100"
               >
                 <FaTimes size={14} />
               </button>
